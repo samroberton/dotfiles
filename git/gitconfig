@@ -1,0 +1,11 @@
+[user]
+	email = sam@samroberton.com
+	name = Sam Roberton
+
+[color]
+        diff = auto
+        status = auto
+        branch = auto
+
+[alias]
+	rm-deleted = !git ls-files --deleted -z | xargs -0 --no-run-if-empty git rm
