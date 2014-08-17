@@ -1,0 +1,29 @@
+# -*-Shell-Script-*-
+
+PS1='[\u@\h \w]\$ '
+
+# don't put duplicate lines or lines starting with space in the history.
+HISTCONTROL=ignoreboth
+
+HISTSIZE=10000
+HISTFILESIZE=100000
+
+# unify history between concurrent bash logins
+# thanks:  http://superuser.com/questions/37576/can-history-files-be-unified-in-bash
+shopt -s histappend
+PROMPT_COMMAND="$( [ '$PROMPT_COMMAND' ] && echo $PROMPT_COMMAND; )history -a; history -n"
+
+# enable blah/**/blah file globbing
+shopt -s globstar
+
+EDITOR=emacsclient
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias e='emacsclient --no-wait'
+
+alias ll='ls -Alh'
+
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)"'
