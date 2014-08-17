@@ -1,0 +1,83 @@
+Text editing:
+    M-q         fill-paragraph
+    C-M-\       indent-region
+    C-x 8 RET   insert unicode character (* as wildcard in name)
+    C-x r k     kill rectangle
+    C-x r t     replace rectangle with text
+    C-x C-o     delete all but one empty lines
+    M-\         delete horizontal space
+    M-SPC       just-one-space
+    C-x C-u     upcase-region
+    C-x C-l     downcase-region (lowercase)
+    C-x w       delete-trailing-whitespace
+
+Selecting:
+    C-x h       mark-whole-buffer
+
+Commenting:
+    M-;         indent-for-comment
+
+Files:
+    C-x C-r     find-file-read-only
+    M-x hexl-find-file
+                open a binary file
+    C-x s       save-some-buffers
+
+Windows:
+    C-x 4 f     find-file-other-window
+    C-x 4 b     swith-to-buffer-other-window
+    C-x 4 C-o   display-buffer (in other window)
+    C-x 4 0     kill-buffer-and-window (kills current)
+
+Frames:
+    C-x 5 2     create a new frame
+    C-x 5 0     delete-frame
+    C-x 5 1     delete-other-frames
+    C-x 5 f     find-file-other-frame (new frame)
+
+Narrowing:
+    C-x n n     narrow-to-region
+    C-x n w     widen
+    C-x n d     narrow-to-defun
+
+Bookmarks:
+    C-x r m     set a bookmark
+    C-x r b     jump to bookmark
+    C-x r l     list bookmarks
+    M-x bookmark-delete
+
+Help:
+    C-h a       apropos
+    C-h i       info (then hit 'm' to type a menu item to select)
+    C-h k       describe key
+    C-h f       describe function
+    C-h F [command]
+                goes to the node in the Emacs manual for the command
+    C-h m       describes active modes and their bindings
+    C-h b       describe-bindings
+
+Paredit:
+    C-)         paredit-forward-slurp-sexp (instead of <C-right>)
+    C-(         paredit-backward-slurp-sexp
+    C-{         paredit-backward-barf-sexp
+    C-}         paredit-forward-bark-sexp (instead of <C-left>)
+    M-q         paredit-reindent-defun
+    M-s         paredit-splice-sexp
+    M-r         paredit-raise-sexp (deletes siblings and splices)
+
+Slime:
+    C-c M-i     slime-fuzzy-complete-symbol
+    C-c I       slime-inspect
+    C-c C-d C-d slime-describe-symbol
+
+Ido:
+    in minibuffer, C-s cycles forward through choices, C-r back, C-d invokes dired, C-k kills
+
+Find/replace:
+    M-x find-name-dired
+                prompts for root directory and filename pattern
+                't' (toggle mark) to mark all files found
+                'Q' query replace in files
+
+Non-emacs:
+    bc          command line calculator
