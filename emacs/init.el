@@ -1,5 +1,5 @@
-(require 'cl)
 (defvar *emacs-load-start* (float-time))
+(require 'cl)
 
 (setq debug-on-error t)
 
@@ -7,7 +7,6 @@
 (set-language-environment "UTF-8")      ; default is "English"
 
 (setq inhibit-startup-message t
-      inhibit-startup-echo-area-message t
       initial-scratch-message nil)
 
 (tool-bar-mode -1)
@@ -37,6 +36,9 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
 
 
 ;;;; Auto-saves ----------------------------------------------------------------
@@ -172,6 +174,11 @@
 (require 'server)
 (unless (server-running-p)
   (add-hook 'after-init-hook 'server-start))
+
+
+;;;; Themes --------------------------------------------------------------------
+(with-demoted-errors
+  (load-theme 'junio))
 
 
 (message "init.el loaded in %fs" (- (float-time) *emacs-load-start*))
