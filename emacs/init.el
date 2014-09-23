@@ -19,7 +19,7 @@
               tab-width 4
               require-final-newline t
               save-place t
-              fill-column 100
+              fill-column 80
               comment-column 40)
 
 (column-number-mode t)

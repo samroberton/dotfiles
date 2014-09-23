@@ -2,6 +2,7 @@ Text editing:
     M-q         fill-paragraph
     C-M-\       indent-region
     C-x 8 RET   insert unicode character (* as wildcard in name)
+    C-x 8 C-h   list bindings for special characters such as à
     C-x r k     kill rectangle
     C-x r t     replace rectangle with text
     C-x C-o     delete all but one empty lines

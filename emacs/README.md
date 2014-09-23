@@ -14,3 +14,5 @@ I have the following ELPA packages installed:
 * `browse-kill-ring`
 * `paredit`
 * `sublime-themes`
+* `cider`
+* `cider-browse-ns`
