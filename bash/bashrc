@@ -16,7 +16,7 @@ PROMPT_COMMAND="$( [ '$PROMPT_COMMAND' ] && echo $PROMPT_COMMAND; )history -a; h
 # enable blah/**/blah file globbing
 shopt -s globstar
 
-EDITOR=emacsclient
+export EDITOR=emacsclient
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
@@ -24,6 +24,6 @@ alias egrep='egrep --color=auto'
 
 alias e='emacsclient --no-wait'
 
-alias ll='ls -Alh'
+alias ll='ls -AlhF'
 
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)"'
