@@ -5,6 +5,7 @@ mkdir ~/.emacs.d
 cd ~/.emacs.d
 ln -s ~/git/dotfiles/emacs/init.el
 ln -s ~/git/dotfiles/emacs/cheat-sheet.txt
+touch custom.el
 ```
 
 After installing, `M-x customize`, search for `inhibit-startup-echo-area-message` and customize to
