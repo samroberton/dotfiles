@@ -57,6 +57,8 @@
 
 (setq mouse-yank-at-point t
       x-select-enable-clipboard t
+      x-select-enable-primary t
+      save-interprogram-paste-before-kill t
       echo-keystrokes 0.1
       browse-url-generic-program (executable-find "firefox")
       browse-url-browser-function 'browse-url-generic
