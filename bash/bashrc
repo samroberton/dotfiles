@@ -11,10 +11,9 @@ HISTFILESIZE=100000
 # unify history between concurrent bash logins
 # thanks:  http://superuser.com/questions/37576/can-history-files-be-unified-in-bash
 shopt -s histappend
-PROMPT_COMMAND="$( [ '$PROMPT_COMMAND' ] && echo $PROMPT_COMMAND; )history -a; history -n"
 
-# enable blah/**/blah file globbing
-shopt -s globstar
+# enable blah/**/blah file globbing -- not available on old versions of bash
+shopt -s globstar 2&> /dev/null || true
 
 export EDITOR=emacsclient
 
