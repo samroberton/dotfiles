@@ -2,12 +2,24 @@
 	email = sam@samroberton.com
 	name = Sam Roberton
 
+[core]
+	editor = emacsclient
+
 [color]
-        diff = auto
-        status = auto
-        branch = auto
+	diff = auto
+	status = auto
+	branch = auto
+
+[log]
+	abbrevCommit = true
+	date = relative
+	decorate = short
+
+[format]
+	pretty = format:%C(yellow)%h%C(reset)%C(green)%d%C(reset)  %C(cyan)%ar%C(reset) : %C(white)%s%C(reset) %C(red)- %an%C(reset)
 
 [alias]
+	lga = log --graph --all
 	rm-deleted = !git ls-files --deleted -z | xargs -0 --no-run-if-empty git rm
 
 [push]
