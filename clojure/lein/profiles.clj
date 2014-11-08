@@ -1,4 +1,5 @@
-{:user {:plugins [[cider/cider-nrepl "0.7.0"]]
+{:user {:plugins [[cider/cider-nrepl "0.7.0"]
+                  [lein-ancient "0.6.0-SNAPSHOT"]]
         :repl-options {:init (do
                                (set! *print-length* 200)
                                (set! *print-level* 20))}}
