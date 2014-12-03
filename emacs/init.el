@@ -28,7 +28,9 @@
 (show-paren-mode t)
 (savehist-mode t)                       ; save minibuffer history
 
-(add-hook 'text-mode-hook 'longlines-mode)
+(if (fboundp 'visual-line-mode)
+    (add-hook 'text-mode-hook 'visual-line-mode)
+  (add-hook 'text-mode-hook 'longlines-mode))
 (setq longlines-wrap-follows-window-size t)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
