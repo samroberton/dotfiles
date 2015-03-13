@@ -9,9 +9,11 @@
 (setq inhibit-startup-message t
       initial-scratch-message nil)
 
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
+(if (display-graphic-p)
+    (progn
+      (tool-bar-mode -1)
+      (menu-bar-mode -1)
+      (scroll-bar-mode -1)))
 
 (setq-default indicate-empty-lines t
               show-trailing-whitespace t
