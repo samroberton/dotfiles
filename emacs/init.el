@@ -76,6 +76,16 @@
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
+;; path on Mac OS X missing ~/bin because it's not launched from bash
+;; http://stackoverflow.com/a/15728130
+(if (string-equal "darwin" (symbol-name system-type))
+    (progn
+      (setq explicit-bash-args (list "--login" "-i"))
+      (let ((path-from-shell
+             (shell-command-to-string "$SHELL -i -l -c 'echo $PATH'")))
+        (setenv "PATH" path-from-shell)
+        (setq exec-path (split-string path-from-shell path-separator)))))
+
 
 ;;;; Interactively do ----------------------------------------------------------
 (ido-mode t)
