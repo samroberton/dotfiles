@@ -41,7 +41,7 @@
 (put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
-(setq custom-file "~/.emacs.d/custom.el")
+(setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 
 
@@ -125,6 +125,15 @@
 
 
 
+;;;; Clj-refactor --------------------------------------------------------------
+(require 'clj-refactor)
+(add-hook 'clojure-mode-hook (lambda ()
+                               (clj-refactor-mode 1)
+                               (yas/minor-mode 1)
+                               (cljr-add-keybindings-with-prefix "C-c C-a")))
+
+
+
 ;;;; Keybindings ---------------------------------------------------------------
 (global-unset-key "\C-x\C-c")
 
@@ -159,8 +168,8 @@
 ;;;; Registers -----------------------------------------------------------------
 ;; usage:  C-x r j <register-identifier>  ('register jump')
 ;; from http://www.emacswiki.org/cgi-bin/wiki/EmacsNiftyTricks
-(set-register ?i '(file . "~/.emacs.d/init.el"))
-(set-register ?c '(file . "~/.emacs.d/cheat-sheet.txt"))
+(set-register ?i '(file . (concat user-emacs-directory "init.el")))
+(set-register ?c '(file . (concat user-emacs-directory "cheat-sheet.txt")))
 (set-register ?t '(file . "~/todo.txt"))
 
 
