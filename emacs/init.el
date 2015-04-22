@@ -29,6 +29,7 @@
 (mouse-wheel-mode t)
 (show-paren-mode t)
 (savehist-mode t)                       ; save minibuffer history
+(global-linum-mode t)
 
 (if (fboundp 'visual-line-mode)
     (add-hook 'text-mode-hook 'visual-line-mode)
@@ -115,6 +116,7 @@
   (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
   (add-hook 'lisp-mode-hook 'enable-paredit-mode)
   (add-hook 'clojure-mode-hook 'enable-paredit-mode)
+  (add-hook 'cider-repl-mode-hook 'enable-paredit-mode)
   (add-hook 'slime-mode-hook 'enable-paredit-mode)
   (add-hook 'slime-repl-mode-hook 'enable-paredit-mode))
 
@@ -134,8 +136,14 @@
 
 
 
+;;;; Flycheck-clojure ----------------------------------------------------------
+(eval-after-load 'flycheck
+  '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
+
+
 ;;;; Keybindings ---------------------------------------------------------------
 (global-unset-key "\C-x\C-c")
+(global-unset-key "\C-t")
 
 ;; use C-x C-m (or C-c C-m if I miss!) for M-x
 ;; - from http://steve.yegge.googlepages.com/effective-emacs (item 2)
@@ -168,8 +176,8 @@
 ;;;; Registers -----------------------------------------------------------------
 ;; usage:  C-x r j <register-identifier>  ('register jump')
 ;; from http://www.emacswiki.org/cgi-bin/wiki/EmacsNiftyTricks
-(set-register ?i '(file . (concat user-emacs-directory "init.el")))
-(set-register ?c '(file . (concat user-emacs-directory "cheat-sheet.txt")))
+(set-register ?i `(file . ,(concat user-emacs-directory "init.el")))
+(set-register ?c `(file . ,(concat user-emacs-directory "cheat-sheet.txt")))
 (set-register ?t '(file . "~/todo.txt"))
 
 
