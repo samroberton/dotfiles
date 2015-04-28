@@ -121,6 +121,14 @@
   (add-hook 'slime-repl-mode-hook 'enable-paredit-mode))
 
 
+;;;; Clj-refactor --------------------------------------------------------------
+(require 'clj-refactor)
+(add-hook 'clojure-mode-hook (lambda ()
+                               (clj-refactor-mode 1)
+                               (yas/minor-mode 1)
+                               (cljr-add-keybindings-with-prefix "C-c C-a")))
+
+
 ;;;; Browse Kill Ring ----------------------------------------------------------
 (when (require 'browse-kill-ring nil 'noerror)
   (browse-kill-ring-default-keybindings))

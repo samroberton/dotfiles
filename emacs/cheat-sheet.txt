@@ -12,6 +12,9 @@ Text editing:
     C-x C-l     downcase-region (lowercase)
     C-x w       delete-trailing-whitespace
 
+    M-x font-lock-fontify-buffer
+                re-syntax-highlight the buffer
+
 Selecting:
     C-x h       mark-whole-buffer
 

@@ -8,10 +8,10 @@
                   [lein-midje "3.1.3"]
                   [lein-vanity "0.2.1"]
                   [refactor-nrepl "0.3.0-SNAPSHOT"]]
-        :dependencies [[org.clojure/tools.nrepl "0.2.8"]
+        :dependencies [[org.clojure/tools.nrepl "0.2.10"]
+                       [org.clojure/tools.reader "0.9.1"]
                        [jonase/kibit "0.0.8"]
                        [acyclic/squiggly-clojure "0.1.2-SNAPSHOT"]]
         :repl-options {:init (do
                                (set! *print-length* 200)
-                               (set! *print-level* 20))}}
- :repl {:resource-paths ["/usr/lib/jvm/java-8-oracle/lib/tools.jar"]}}
+                               (set! *print-level* 20))}}}
