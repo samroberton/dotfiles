@@ -11,12 +11,15 @@ Text editing:
     C-x C-u     upcase-region
     C-x C-l     downcase-region (lowercase)
     C-x w       delete-trailing-whitespace
+    C-x r t <string> RET
+                string-rectangle (replace rectangle contents)
 
     M-x font-lock-fontify-buffer
                 re-syntax-highlight the buffer
 
 Selecting:
     C-x h       mark-whole-buffer
+    C-x SPC     rectangle-mark-mode (toggle)
 
 Commenting:
     M-;         indent-for-comment

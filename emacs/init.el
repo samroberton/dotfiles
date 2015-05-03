@@ -45,6 +45,10 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 
+(add-hook 'after-init-hook 'global-company-mode)
+
+(setq magit-last-seen-setup-instructions "1.4.0")
+
 
 ;;;; Auto-saves ----------------------------------------------------------------
 (defvar --backup-directory (concat user-emacs-directory "backups"))
@@ -129,24 +133,14 @@
                                (cljr-add-keybindings-with-prefix "C-c C-a")))
 
 
-;;;; Browse Kill Ring ----------------------------------------------------------
-(when (require 'browse-kill-ring nil 'noerror)
-  (browse-kill-ring-default-keybindings))
-
-
-
-;;;; Clj-refactor --------------------------------------------------------------
-(require 'clj-refactor)
-(add-hook 'clojure-mode-hook (lambda ()
-                               (clj-refactor-mode 1)
-                               (yas/minor-mode 1)
-                               (cljr-add-keybindings-with-prefix "C-c C-a")))
-
-
-
 ;;;; Flycheck-clojure ----------------------------------------------------------
 (eval-after-load 'flycheck
   '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
+
+
+;;;; Browse Kill Ring ----------------------------------------------------------
+(when (require 'browse-kill-ring nil 'noerror)
+  (browse-kill-ring-default-keybindings))
 
 
 ;;;; Keybindings ---------------------------------------------------------------
@@ -164,9 +158,6 @@
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
 
-(global-set-key "\C-c\C-g" 'what-line)
-(global-set-key "\C-cg" 'goto-line)
-
 (global-set-key "\C-cb" 'bury-buffer)
 
 ;; searches might as well be regexps
@@ -174,7 +165,8 @@
 (global-set-key "\C-r" 'isearch-backward-regexp)
 
 (global-set-key "\C-x\C-b" 'electric-buffer-list)
-(global-set-key "\M-/" 'hippie-expand)
+
+(global-set-key "\M-/" 'company-complete)
 
 (global-set-key "\C-m" 'newline-and-indent)
 

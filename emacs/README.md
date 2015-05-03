@@ -16,4 +16,9 @@ I have the following ELPA packages installed:
 * `paredit`
 * `sublime-themes`
 * `cider`
+* `company`
 * `cider-browse-ns`
+* `restclient`
+* `yasnippet`
+* `multiple-cursors`
+* `magit`
