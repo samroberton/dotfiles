@@ -17,6 +17,8 @@ Text editing:
     M-x font-lock-fontify-buffer
                 re-syntax-highlight the buffer
 
+    C-x |       align-regexp (interactively specify what you want to line up in the region)
+
 Selecting:
     C-x h       mark-whole-buffer
     C-x SPC     rectangle-mark-mode (toggle)

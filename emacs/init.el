@@ -172,7 +172,9 @@
 
 (global-set-key "\C-xw" 'delete-trailing-whitespace)
 
-(global-set-key "\C-xg" 'magit-status)
+(global-set-key "\C-x|" 'align-regexp)
+
+(global-set-key "\C-cg" 'magit-status)
 
 
 ;;;; Registers -----------------------------------------------------------------
