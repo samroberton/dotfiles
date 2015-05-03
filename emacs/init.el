@@ -172,6 +172,8 @@
 
 (global-set-key "\C-xw" 'delete-trailing-whitespace)
 
+(global-set-key "\C-xg" 'magit-status)
+
 
 ;;;; Registers -----------------------------------------------------------------
 ;; usage:  C-x r j <register-identifier>  ('register jump')
