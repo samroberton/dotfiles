@@ -45,6 +45,10 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 
+; download from:  https://github.com/adobe-fonts/source-code-pro
+(set-default-font "Source Code Pro Light")
+(set-face-attribute 'default nil :height 120)
+
 (add-hook 'after-init-hook 'global-company-mode)
 
 (setq magit-last-seen-setup-instructions "1.4.0")
