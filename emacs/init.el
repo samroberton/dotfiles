@@ -91,6 +91,10 @@
         (setenv "PATH" path-from-shell)
         (setq exec-path (split-string path-from-shell path-separator)))))
 
+;; magit needs to use PuTTY/Pageant for remotes which connect via SSH
+(if (string-equal "windows-nt" (symbol-name system-type))
+    (setenv "GIT_SSH" "C:\\Program Files (x86)\\PuTTY\\plink.exe"))
+
 
 ;;;; Interactively do ----------------------------------------------------------
 (ido-mode t)
