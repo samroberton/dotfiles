@@ -99,7 +99,9 @@
 
 ;; magit needs to use PuTTY/Pageant for remotes which connect via SSH
 (if (string-equal "windows-nt" (symbol-name system-type))
-    (setenv "GIT_SSH" "C:\\Program Files (x86)\\PuTTY\\plink.exe"))
+    (progn
+      (setenv "GIT_SSH" "C:\\Program Files (x86)\\PuTTY\\plink.exe")
+      (global-set-key "\C-cf" 'toggle-frame-fullscreen)))
 
 
 ;;;; Interactively do ----------------------------------------------------------
