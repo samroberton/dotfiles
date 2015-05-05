@@ -47,9 +47,10 @@
 
 ; download from:  https://github.com/adobe-fonts/source-code-pro
 (set-default-font "Source Code Pro Light")
-(set-face-attribute 'default nil :height (case (symbol-name system-type)
-                                           ("darwin"     120)
-                                           ("windows-nt" 90)))
+(set-face-attribute 'default nil :height (case system-type
+                                           (darwin     120)
+                                           (windows-nt 90)
+                                           (otherwise  100)))
 
 (add-hook 'after-init-hook 'global-company-mode)
 
