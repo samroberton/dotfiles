@@ -105,6 +105,42 @@
       (global-set-key "\C-cf" 'toggle-frame-fullscreen)))
 
 
+;;;; helm ----------------------------------------------------------------------
+
+(require 'helm)
+(require 'helm-config)
+
+(global-set-key "\C-ch" 'helm-command-prefix)
+(global-unset-key "\C-xc")
+
+(global-set-key "\M-x" 'helm-M-x)
+(global-set-key "\M-y" 'helm-show-kill-ring)
+(global-set-key "\C-xb" 'helm-mini)
+(global-set-key "\C-x\C-f" 'helm-find-files)
+(global-set-key "\C-cho" 'helm-occur)
+
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+(define-key helm-map "\C-i" 'helm-execute-persistent-action) ; make TAB work in the terminal
+(define-key helm-map "\C-z" 'helm-select-action)
+
+(define-key shell-mode-map "\C-c\C-l" 'helm-comint-input-ring)
+(define-key minibuffer-local-map "\C-c\C-l" 'helm-minibuffer-history)
+
+(setq helm-split-window-in-side-p           t ; open helm buffer in current window
+      helm-move-to-line-cycle-in-source     t
+      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+      helm-ff-file-name-history-use-recentf t
+      helm-M-x-fuzzy-match                  t
+      helm-buffers-fuzzy-matching           t
+      helm-recentf-fuzzy-match              t
+      helm-apropos-fuzzy-match              t)
+
+(helm-mode 1)
+
+(require 'helm-descbinds)
+(helm-descbinds-mode)
+
+
 ;;;; Interactively do ----------------------------------------------------------
 (ido-mode t)
 (setq ido-case-fold  t                  ; case-insensitive
@@ -149,11 +185,6 @@
 ;;;; Flycheck-clojure ----------------------------------------------------------
 (eval-after-load 'flycheck
   '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
-
-
-;;;; Browse Kill Ring ----------------------------------------------------------
-(when (require 'browse-kill-ring nil 'noerror)
-  (browse-kill-ring-default-keybindings))
 
 
 ;;;; Keybindings ---------------------------------------------------------------
