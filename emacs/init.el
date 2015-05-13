@@ -1,7 +1,8 @@
 (defvar *emacs-load-start* (float-time))
 (require 'cl)
 
-(setq debug-on-error t)
+(setq debug-on-error nil)
+
 
 ;;;; General options -----------------------------------------------------------
 (set-language-environment "UTF-8")      ; default is "English"
@@ -123,7 +124,9 @@
 (define-key helm-map "\C-i" 'helm-execute-persistent-action) ; make TAB work in the terminal
 (define-key helm-map "\C-z" 'helm-select-action)
 
-(define-key shell-mode-map "\C-c\C-l" 'helm-comint-input-ring)
+(add-hook 'shell-mode-hook
+          #'(lambda ()
+              (define-key shell-mode-map "\C-c\C-l" 'helm-comint-input-ring)))
 (define-key minibuffer-local-map "\C-c\C-l" 'helm-minibuffer-history)
 
 (setq helm-split-window-in-side-p           t ; open helm buffer in current window
