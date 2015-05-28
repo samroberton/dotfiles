@@ -25,6 +25,8 @@
               fill-column 80
               comment-column 40)
 
+(prefer-coding-system 'utf-8-unix)
+
 (column-number-mode t)
 (line-number-mode t)
 (mouse-wheel-mode t)
@@ -114,6 +116,9 @@
 (global-set-key "\C-ch" 'helm-command-prefix)
 (global-unset-key "\C-xc")
 
+;; 'C-h C' describes coding system
+(global-set-key "\C-cC" 'set-buffer-file-coding-system)
+
 (global-set-key "\M-x" 'helm-M-x)
 (global-set-key "\M-y" 'helm-show-kill-ring)
 (global-set-key "\C-xb" 'helm-mini)
@@ -155,7 +160,7 @@
 
 ;;;; Uniquify ------------------------------------------------------------------
 (require 'uniquify)                     ; make buffer names unique
-(setq uniquify-buffer-name-style 'forward
+(setq uniquify-buffer-name-style 'reverse
       uniquify-after-kill-buffer-p t
       uniquify-ignore-buffers-re "^\\*") ; don't screw with special buffers
 

@@ -22,6 +22,7 @@ Text editing:
 Selecting:
     C-x h       mark-whole-buffer
     C-x SPC     rectangle-mark-mode (toggle)
+    C-c h o     helm-occur (lines matches regexp)
 
 Commenting:
     M-;         indent-for-comment
