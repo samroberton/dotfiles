@@ -195,6 +195,11 @@
   '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
 
 
+;;;; Ace-jump mode -------------------------------------------------------------
+(require 'ace-jump-mode)
+(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+
+
 ;;;; Keybindings ---------------------------------------------------------------
 (global-unset-key "\C-x\C-c")
 (global-unset-key "\C-t")

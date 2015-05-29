@@ -18,11 +18,13 @@ Text editing:
                 re-syntax-highlight the buffer
 
     C-x |       align-regexp (interactively specify what you want to line up in the region)
+    C-M-k       kill-sexp
 
 Selecting:
     C-x h       mark-whole-buffer
     C-x SPC     rectangle-mark-mode (toggle)
     C-c h o     helm-occur (lines matches regexp)
+    C-M-SPC     mark-sexp
 
 Commenting:
     M-;         indent-for-comment
