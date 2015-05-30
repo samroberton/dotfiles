@@ -19,6 +19,7 @@ Text editing:
 
     C-x |       align-regexp (interactively specify what you want to line up in the region)
     C-M-k       kill-sexp
+    M-g TAB     move-to-column
 
 Selecting:
     C-x h       mark-whole-buffer
