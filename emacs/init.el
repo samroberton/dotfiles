@@ -59,6 +59,9 @@
 
 (setq magit-last-seen-setup-instructions "1.4.0")
 
+;; https://github.com/technomancy/emacs-starter-kit/issues/39
+(setq ffap-machine-p-known 'reject)
+
 
 ;;;; Auto-saves ----------------------------------------------------------------
 (defvar --backup-directory (concat user-emacs-directory "backups"))
