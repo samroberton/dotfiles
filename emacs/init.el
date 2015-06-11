@@ -235,6 +235,7 @@
 (global-set-key "\C-x|" 'align-regexp)
 
 (global-set-key "\C-cg" 'magit-status)
+(global-set-key "\C-cG" 'vc-git-grep)
 
 
 ;;;; Registers -----------------------------------------------------------------
