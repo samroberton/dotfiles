@@ -6,15 +6,10 @@
 
 ;;;; General options -----------------------------------------------------------
 (set-language-environment "UTF-8")      ; default is "English"
+(prefer-coding-system 'utf-8-unix)
 
 (setq inhibit-startup-message t
       initial-scratch-message nil)
-
-(if (display-graphic-p)
-    (progn
-      (tool-bar-mode -1)
-      (menu-bar-mode -1)
-      (scroll-bar-mode -1)))
 
 (setq-default indicate-empty-lines t
               show-trailing-whitespace t
@@ -25,8 +20,9 @@
               fill-column 80
               comment-column 40)
 
-(prefer-coding-system 'utf-8-unix)
-
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
 (column-number-mode t)
 (line-number-mode t)
 (mouse-wheel-mode t)
@@ -34,10 +30,15 @@
 (savehist-mode t)                       ; save minibuffer history
 (global-linum-mode t)
 
-(if (fboundp 'visual-line-mode)
-    (add-hook 'text-mode-hook 'visual-line-mode)
-  (add-hook 'text-mode-hook 'longlines-mode))
-(setq longlines-wrap-follows-window-size t)
+(add-hook 'text-mode-hook 'visual-line-mode)
+
+(setq mouse-yank-at-point t
+      x-select-enable-clipboard t
+      x-select-enable-primary t
+      save-interprogram-paste-before-kill t
+      echo-keystrokes 0.1
+      vc-follow-symlinks t
+      apropos-do-all t)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -48,7 +49,7 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 
-; download from:  https://github.com/adobe-fonts/source-code-pro
+;; download from:  https://github.com/adobe-fonts/source-code-pro
 (set-default-font "Source Code Pro Light")
 (set-face-attribute 'default nil :height (case system-type
                                            (darwin     120)
@@ -77,38 +78,25 @@
       kept-new-versions 6               ; keep the most recent 6
       kept-old-versions 2)              ; keep the original 2
 
-(setq mouse-yank-at-point t
-      x-select-enable-clipboard t
-      x-select-enable-primary t
-      save-interprogram-paste-before-kill t
-      echo-keystrokes 0.1
-      browse-url-generic-program (executable-find "firefox")
-      browse-url-browser-function 'browse-url-generic
-      vc-follow-symlinks t
-      apropos-do-all t)
-
 
 ;;;; Emacs 24 Package setup ----------------------------------------------------
 (require 'package)
 (package-initialize)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
 ;; path on Mac OS X missing ~/bin because it's not launched from bash
 ;; http://stackoverflow.com/a/15728130
-(if (string-equal "darwin" (symbol-name system-type))
-    (progn
-      (setq explicit-bash-args (list "--login" "-i"))
-      (let ((path-from-shell
-             (shell-command-to-string "$SHELL -i -l -c 'echo $PATH'")))
-        (setenv "PATH" path-from-shell)
-        (setq exec-path (split-string path-from-shell path-separator)))))
+(when (equal system-type 'darwin)
+  (setq explicit-bash-args (list "--login" "-i"))
+  (let ((path-from-shell
+         (shell-command-to-string "$SHELL -i -l -c 'echo $PATH'")))
+    (setenv "PATH" path-from-shell)
+    (setq exec-path (split-string path-from-shell path-separator))))
 
 ;; magit needs to use PuTTY/Pageant for remotes which connect via SSH
-(if (string-equal "windows-nt" (symbol-name system-type))
-    (progn
-      (setenv "GIT_SSH" "C:\\Program Files (x86)\\PuTTY\\plink.exe")
-      (global-set-key "\C-cf" 'toggle-frame-fullscreen)))
+(when (equal system-type 'windows-nt)
+  (setenv "GIT_SSH" "C:\\Program Files (x86)\\PuTTY\\plink.exe"))
 
 
 ;;;; helm ----------------------------------------------------------------------
@@ -118,9 +106,6 @@
 
 (global-set-key "\C-ch" 'helm-command-prefix)
 (global-unset-key "\C-xc")
-
-;; 'C-h C' describes coding system
-(global-set-key "\C-cC" 'set-buffer-file-coding-system)
 
 (global-set-key "\M-x" 'helm-M-x)
 (global-set-key "\M-y" 'helm-show-kill-ring)
@@ -152,13 +137,11 @@
 (helm-descbinds-mode)
 
 
-;;;; Interactively do ----------------------------------------------------------
-(ido-mode t)
-(setq ido-case-fold  t                  ; case-insensitive
-      ido-use-filename-at-point nil
-      ido-use-url-at-point nil
-      ido-enable-flex-matching t
-      ido-confirm-unique-completion t)
+;;;; Projectile ----------------------------------------------------------------
+(projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(require 'helm-projectile)
+(helm-projectile-on)
 
 
 ;;;; Uniquify ------------------------------------------------------------------
@@ -207,24 +190,21 @@
 (global-unset-key "\C-x\C-c")
 (global-unset-key "\C-t")
 
-;; use C-x C-m (or C-c C-m if I miss!) for M-x
-;; - from http://steve.yegge.googlepages.com/effective-emacs (item 2)
-(global-set-key "\C-x\C-m" 'execute-extended-command)
-(global-set-key "\C-c\C-m" 'execute-extended-command)
+;; 'C-h C' describes coding system
+(global-set-key "\C-cC" 'set-buffer-file-coding-system)
+
+(global-set-key "\C-cf" 'toggle-frame-fullscreen)
 
 ;; use C-w to delete back a word to match the shortcut in the shell
-;; Rebind kill-region (normally C-w) to C-x C-k (or C-c C-k if I miss)
+;; Rebind kill-region (normally C-w) to C-x C-k
 (global-set-key "\C-w" 'backward-kill-word)
 (global-set-key "\C-x\C-k" 'kill-region)
-(global-set-key "\C-c\C-k" 'kill-region)
 
 (global-set-key "\C-cb" 'bury-buffer)
 
 ;; searches might as well be regexps
 (global-set-key "\C-s" 'isearch-forward-regexp)
 (global-set-key "\C-r" 'isearch-backward-regexp)
-
-(global-set-key "\C-x\C-b" 'electric-buffer-list)
 
 (global-set-key "\M-/" 'company-complete)
 
@@ -244,28 +224,6 @@
 (set-register ?i `(file . ,(concat user-emacs-directory "init.el")))
 (set-register ?c `(file . ,(concat user-emacs-directory "cheat-sheet.txt")))
 (set-register ?t '(file . "~/todo.txt"))
-
-
-;;;; Useful functions ----------------------------------------------------------
-(defun fromdos ()
-  (interactive)
-  (goto-char (point-min))
-  (while (search-forward "\r" nil t)
-    (replace-match "")))
-
-(defun todos ()
-  (interactive)
-  (goto-char (point-min))
-  (while (search-forward "\n" nil t)
-    (replace-match "\r\n")))
-
-;; multiline paragraph -> single line of text
-(defun unfill-paragraph ()
-  (interactive)
-  (let ((fill-column (point-max)))
-    (fill-paragraph nil)))
-
-(defalias 'qrr 'query-replace-regexp)
 
 
 ;;;; Emacsclient ---------------------------------------------------------------

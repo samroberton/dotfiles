@@ -38,7 +38,7 @@ Files:
 
 Windows:
     C-x 4 f     find-file-other-window
-    C-x 4 b     swith-to-buffer-other-window
+    C-x 4 b     switch-to-buffer-other-window
     C-x 4 C-o   display-buffer (in other window)
     C-x 4 0     kill-buffer-and-window (kills current)
 
@@ -78,19 +78,8 @@ Paredit:
     M-s         paredit-splice-sexp
     M-r         paredit-raise-sexp (deletes siblings and splices)
 
-Slime:
-    C-c M-i     slime-fuzzy-complete-symbol
-    C-c I       slime-inspect
-    C-c C-d C-d slime-describe-symbol
-
-Ido:
-    in minibuffer, C-s cycles forward through choices, C-r back, C-d invokes dired, C-k kills
-
 Find/replace:
     M-x find-name-dired
                 prompts for root directory and filename pattern
                 't' (toggle mark) to mark all files found
                 'Q' query replace in files
-
-Non-emacs:
-    bc          command line calculator
