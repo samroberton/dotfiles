@@ -1,10 +1,17 @@
 (defvar *emacs-load-start* (float-time))
-(require 'cl)
 
+;; Set to `t' to debug problems loading init.el
 (setq debug-on-error nil)
 
 
 ;;;; General options -----------------------------------------------------------
+
+;; Allows us to use `case'
+(require 'cl)
+
+;; Let's not accidentally kill Emacs
+(global-unset-key (kbd "C-x c"))
+
 (set-language-environment "UTF-8")      ; default is "English"
 (prefer-coding-system 'utf-8-unix)
 
@@ -25,10 +32,10 @@
 (scroll-bar-mode -1)
 (column-number-mode t)
 (line-number-mode t)
+(global-linum-mode t)
 (mouse-wheel-mode t)
 (show-paren-mode t)
 (savehist-mode t)                       ; save minibuffer history
-(global-linum-mode t)
 
 (add-hook 'text-mode-hook 'visual-line-mode)
 
@@ -37,8 +44,11 @@
       x-select-enable-primary t
       save-interprogram-paste-before-kill t
       echo-keystrokes 0.1
-      vc-follow-symlinks t
-      apropos-do-all t)
+      vc-follow-symlinks t)
+
+;; Avoid trying to ping some machine in Hong Kong just because you typed
+;; something.hk: https://github.com/technomancy/emacs-starter-kit/issues/39
+(setq ffap-machine-p-known 'reject)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -49,19 +59,31 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 
-;; download from:  https://github.com/adobe-fonts/source-code-pro
-(set-default-font "Source Code Pro Light")
-(set-face-attribute 'default nil :height (case system-type
-                                           (darwin     120)
-                                           (windows-nt 90)
-                                           (otherwise  100)))
+;; Use Source Code Pro when available:
+;; https://github.com/adobe-fonts/source-code-pro
+(when (x-list-fonts "Source Code Pro Light")
+  (set-default-font "Source Code Pro Light")
+  (set-face-attribute 'default nil :height (case system-type
+                                             (darwin     120)
+                                             (windows-nt 90)
+                                             (otherwise  100))))
 
-(add-hook 'after-init-hook 'global-company-mode)
 
-(setq magit-last-seen-setup-instructions "1.4.0")
+;;;; Platform-specific customisations ------------------------------------------
 
-;; https://github.com/technomancy/emacs-starter-kit/issues/39
-(setq ffap-machine-p-known 'reject)
+;; PATH on Mac OS X missing ~/bin because it's not launched from bash
+;; http://stackoverflow.com/a/15728130
+(when (equal system-type 'darwin)
+  (setq explicit-bash-args (list "--login" "-i"))
+  (let ((path-from-shell
+         (shell-command-to-string "$SHELL -i -l -c 'echo $PATH'")))
+    (setenv "PATH" path-from-shell)
+    (setq exec-path (split-string path-from-shell path-separator))))
+
+;; magit needs to use PuTTY/Pageant for remotes which connect via SSH
+(when (equal system-type 'windows-nt)
+  (setenv "GIT_SSH" "C:\\Program Files (x86)\\PuTTY\\plink.exe"))
+
 
 
 ;;;; Auto-saves ----------------------------------------------------------------
@@ -81,31 +103,24 @@
 
 ;;;; Emacs 24 Package setup ----------------------------------------------------
 (require 'package)
-(package-initialize)
-;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-
-;; path on Mac OS X missing ~/bin because it's not launched from bash
-;; http://stackoverflow.com/a/15728130
-(when (equal system-type 'darwin)
-  (setq explicit-bash-args (list "--login" "-i"))
-  (let ((path-from-shell
-         (shell-command-to-string "$SHELL -i -l -c 'echo $PATH'")))
-    (setenv "PATH" path-from-shell)
-    (setq exec-path (split-string path-from-shell path-separator))))
-
-;; magit needs to use PuTTY/Pageant for remotes which connect via SSH
-(when (equal system-type 'windows-nt)
-  (setenv "GIT_SSH" "C:\\Program Files (x86)\\PuTTY\\plink.exe"))
+(package-initialize)
 
 
-;;;; helm ----------------------------------------------------------------------
+
+(add-hook 'after-init-hook 'global-company-mode)
+
+(setq magit-last-seen-setup-instructions "1.4.0")
+
+
+;;;; Helm ----------------------------------------------------------------------
 
 (require 'helm)
 (require 'helm-config)
 
 (global-set-key "\C-ch" 'helm-command-prefix)
-(global-unset-key "\C-xc")
 
 (global-set-key "\M-x" 'helm-M-x)
 (global-set-key "\M-y" 'helm-show-kill-ring)
