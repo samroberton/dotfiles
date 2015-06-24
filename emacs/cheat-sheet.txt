@@ -36,6 +36,11 @@ Files:
                 open a binary file
     C-x s       save-some-buffers
 
+Org mode:
+    Tab         toggle visibility
+    M-<left>/<right> promote/demote heading
+    C-c C-o     org-open-at-point
+
 Windows:
     C-x 4 f     find-file-other-window
     C-x 4 b     switch-to-buffer-other-window

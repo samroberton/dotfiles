@@ -6,11 +6,13 @@
 
 ;;;; General options -----------------------------------------------------------
 
+(global-unset-key (kbd "C-x c"))        ; let's not accidentally kill Emacs
+(global-unset-key (kbd "C-t"))          ; transposing characters not useful
+
+(global-set-key (kbd "C-c f") 'toggle-frame-fullscreen)
+
 ;; Allows us to use `case'
 (require 'cl)
-
-;; Let's not accidentally kill Emacs
-(global-unset-key (kbd "C-x c"))
 
 (set-language-environment "UTF-8")      ; default is "English"
 (prefer-coding-system 'utf-8-unix)
@@ -109,7 +111,6 @@
 (package-initialize)
 
 
-
 (add-hook 'after-init-hook 'global-company-mode)
 
 (setq magit-last-seen-setup-instructions "1.4.0")
@@ -139,7 +140,6 @@
 
 (setq helm-split-window-in-side-p           t ; open helm buffer in current window
       helm-move-to-line-cycle-in-source     t
-      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
       helm-ff-file-name-history-use-recentf t
       helm-M-x-fuzzy-match                  t
       helm-buffers-fuzzy-matching           t
@@ -198,17 +198,14 @@
 
 ;;;; Ace-jump mode -------------------------------------------------------------
 (require 'ace-jump-mode)
-(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+(global-set-key (kbd "C-c j") 'ace-jump-mode)
 
 
 ;;;; Keybindings ---------------------------------------------------------------
-(global-unset-key "\C-x\C-c")
-(global-unset-key "\C-t")
 
 ;; 'C-h C' describes coding system
 (global-set-key "\C-cC" 'set-buffer-file-coding-system)
 
-(global-set-key "\C-cf" 'toggle-frame-fullscreen)
 
 ;; use C-w to delete back a word to match the shortcut in the shell
 ;; Rebind kill-region (normally C-w) to C-x C-k
