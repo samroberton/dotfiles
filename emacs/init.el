@@ -191,11 +191,6 @@
                                (cljr-add-keybindings-with-prefix "C-c C-a")))
 
 
-;;;; Flycheck-clojure ----------------------------------------------------------
-(eval-after-load 'flycheck
-  '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
-
-
 ;;;; Ace-jump mode -------------------------------------------------------------
 (require 'ace-jump-mode)
 (global-set-key (kbd "C-c j") 'ace-jump-mode)
