@@ -67,7 +67,7 @@
   (set-default-font "Source Code Pro Light")
   (set-face-attribute 'default nil :height (case system-type
                                              (darwin     120)
-                                             (windows-nt 90)
+                                             (windows-nt 120)
                                              (otherwise  100))))
 
 
@@ -242,6 +242,26 @@
 ;;;; Themes --------------------------------------------------------------------
 (with-demoted-errors
   (load-theme 'junio))
+
+
+
+;;;; .emacs config for encouraging staying under 100 cols
+;; (defvar no-whitespace-highlighting-modes
+;;   '(Man-mode
+;;     calendar-mode
+;;     ...))
+
+;; (use-package highlight-beyond-fill-column
+;;   :config (add-hook 'font-lock-mode-hook
+;;             (lambda ()
+;;               (unless (member major-mode no-whitespace-highlighting-modes)
+;;                 (highlight-beyond-fill-column)))))
+
+(require 'whitespace)
+(setq whitespace-line-column 100)
+(setq whitespace-style '(face lines-tail))
+
+(add-hook 'prog-mode-hook 'whitespace-mode)
 
 
 (message "init.el loaded in %fs" (- (float-time) *emacs-load-start*))
