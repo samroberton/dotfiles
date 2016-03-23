@@ -7,6 +7,7 @@
 ;;;; General options -----------------------------------------------------------
 
 (global-unset-key (kbd "C-x c"))        ; let's not accidentally kill Emacs
+(global-unset-key (kbd "C-x C-c"))      ; let's not accidentally kill Emacs
 (global-unset-key (kbd "C-t"))          ; transposing characters not useful
 
 (global-set-key (kbd "C-c f") 'toggle-frame-fullscreen)
@@ -192,8 +193,8 @@
 
 
 ;;;; Ace-jump mode -------------------------------------------------------------
-(require 'ace-jump-mode)
-(global-set-key (kbd "C-c j") 'ace-jump-mode)
+(require 'avy)
+(global-set-key (kbd "C-c j") 'avy-goto-word-1)
 
 
 ;;;; Keybindings ---------------------------------------------------------------
@@ -222,8 +223,9 @@
 (global-set-key "\C-x|" 'align-regexp)
 
 (global-set-key "\C-cg" 'magit-status)
-(global-set-key "\C-cG" 'vc-git-grep)
+(global-set-key "\C-cG" 'helm-projectile-ag)
 
+(setq helm-ag-use-agignore t)
 
 ;;;; Registers -----------------------------------------------------------------
 ;; usage:  C-x r j <register-identifier>  ('register jump')
