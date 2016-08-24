@@ -187,9 +187,12 @@
 ;;;; Clj-refactor --------------------------------------------------------------
 (require 'clj-refactor)
 (add-hook 'clojure-mode-hook (lambda ()
-                               (clj-refactor-mode 1)
+                               (eldoc-mode 1)
+                               ;;(clj-refactor-mode 1)
                                (yas/minor-mode 1)
                                (cljr-add-keybindings-with-prefix "C-c C-a")))
+
+(setq cider-repl-display-help-banner nil)
 
 
 ;;;; Ace-jump mode -------------------------------------------------------------
