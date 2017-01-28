@@ -270,3 +270,31 @@
 
 
 (message "init.el loaded in %fs" (- (float-time) *emacs-load-start*))
+
+
+;;;; Haskell -------------------------------------------------------------------
+
+;(autoload 'ghc-init "ghc" nil t)
+;(autoload 'ghc-debug "ghc" nil t)
+;(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+
+(setq haskell-stylish-on-save t)
+
+(require 'intero)
+(require 'flycheck)
+(with-eval-after-load 'intero
+  (add-hook 'haskell-mode-hook
+            (lambda ()
+              (flycheck-mode)))
+  (with-eval-after-load 'flycheck
+    (flycheck-add-next-checker 'intero '(warning . haskell-hlint))))
+
+(require 'hs-lint)
+
+
+;;;; Multiple cursors ----------------------------------------------------------
+
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
