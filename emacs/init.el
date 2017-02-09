@@ -183,6 +183,8 @@
   (add-hook 'slime-mode-hook 'enable-paredit-mode)
   (add-hook 'slime-repl-mode-hook 'enable-paredit-mode))
 
+(setq cider-repl-display-help-banner nil)
+
 
 ;;;; Clj-refactor --------------------------------------------------------------
 (require 'clj-refactor)
@@ -269,9 +271,6 @@
 (add-hook 'prog-mode-hook 'whitespace-mode)
 
 
-(message "init.el loaded in %fs" (- (float-time) *emacs-load-start*))
-
-
 ;;;; Haskell -------------------------------------------------------------------
 
 ;(autoload 'ghc-init "ghc" nil t)
@@ -298,3 +297,7 @@
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+
+
+(message "init.el loaded in %fs" (- (float-time) *emacs-load-start*))
