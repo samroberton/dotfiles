@@ -71,6 +71,8 @@
                                              (windows-nt 120)
                                              (otherwise  100))))
 
+(setq wdired-allow-to-change-permissions t)
+
 
 ;;;; Platform-specific customisations ------------------------------------------
 
