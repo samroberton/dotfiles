@@ -109,7 +109,7 @@
 ;;;; Emacs 24 Package setup ----------------------------------------------------
 (require 'package)
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+;(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 
 
@@ -120,7 +120,6 @@
 
 ;;;; Helm ----------------------------------------------------------------------
 
-(require 'helm)
 (require 'helm-config)
 
 (global-set-key "\C-ch" 'helm-command-prefix)
@@ -131,9 +130,10 @@
 (global-set-key "\C-x\C-f" 'helm-find-files)
 (global-set-key "\C-cho" 'helm-occur)
 
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-(define-key helm-map "\C-i" 'helm-execute-persistent-action) ; make TAB work in the terminal
-(define-key helm-map "\C-z" 'helm-select-action)
+(with-eval-after-load 'helm
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+  (define-key helm-map "\C-i" 'helm-execute-persistent-action) ; make TAB work in the terminal
+  (define-key helm-map "\C-z" 'helm-select-action))
 
 (add-hook 'shell-mode-hook
           #'(lambda ()
@@ -149,9 +149,6 @@
       helm-apropos-fuzzy-match              t)
 
 (helm-mode 1)
-
-(require 'helm-descbinds)
-(helm-descbinds-mode)
 
 
 ;;;; Projectile ----------------------------------------------------------------
@@ -198,7 +195,7 @@
 (setq cider-repl-display-help-banner nil)
 
 
-;;;; Ace-jump mode -------------------------------------------------------------
+;;;; Avy mode ------------------------------------------------------------------
 (require 'avy)
 (global-set-key (kbd "C-c j") 'avy-goto-word-1)
 
@@ -288,8 +285,6 @@
               (flycheck-mode)))
   (with-eval-after-load 'flycheck
     (flycheck-add-next-checker 'intero '(warning . haskell-hlint))))
-
-(require 'hs-lint)
 
 
 ;;;; Multiple cursors ----------------------------------------------------------
