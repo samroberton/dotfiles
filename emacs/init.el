@@ -176,6 +176,7 @@
            ("C-x b"   . helm-mini)
            ("C-x C-f" . helm-find-files)
            ("C-c h o" . helm-occur)
+           ("C-c h b" . helm-resume)
 
            :map helm-map
            ("[tab]" . helm-execute-persistent-action)
