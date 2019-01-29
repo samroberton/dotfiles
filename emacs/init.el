@@ -206,8 +206,10 @@
 (use-package projectile
   :ensure   t
   :commands (projectile-find-file projectile-switch-project)
+  :bind     (:map projectile-mode-map
+                  ("C-c p" . projectile-command-map))
   :config
-  (projectile-global-mode)
+  (projectile-mode)
   (setq projectile-completion-system 'helm))
 
 
