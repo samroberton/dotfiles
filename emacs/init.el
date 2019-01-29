@@ -169,6 +169,14 @@
 
 ;;;; Packages ------------------------------------------------------------------
 
+(use-package windmove
+  :ensure t
+  :config
+  ;; shift + arrows to move between windows
+  (windmove-default-keybindings)
+  (setq windmove-wrap-around t))
+
+
 (use-package helm
   :ensure t
   :bind   (("M-x"     . helm-M-x)
@@ -243,6 +251,7 @@
 
 (use-package cider
   :ensure t
+  :bind   ("C-c M-o" . cider-repl-clear-buffer)
   :config
   (setq cider-repl-display-help-banner nil))
 
