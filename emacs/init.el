@@ -152,6 +152,12 @@
 
 
 
+;;;; ediff ---------------------------------------------------------------------
+
+(setq ediff-window-setup-function #'ediff-setup-windows-plain
+      ediff-split-window-function #'split-window-vertically)
+
+
 ;;;; Emacs Package setup -------------------------------------------------------
 
 (require 'package)
