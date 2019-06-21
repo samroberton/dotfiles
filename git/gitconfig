@@ -18,6 +18,9 @@
 [format]
 	pretty = format:%C(yellow)%h%C(reset)%C(green)%d%C(reset)  %C(cyan)%ar%C(reset) : %C(white)%s%C(reset) %C(red)- %an%C(reset)
 
+[merge]
+    conflictstyle = diff3
+
 [alias]
 	lga = log --graph --all
 	rm-deleted = !git ls-files --deleted -z | xargs -0 --no-run-if-empty git rm
