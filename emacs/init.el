@@ -257,6 +257,19 @@
 
 
 
+(use-package flycheck-clj-kondo
+  :ensure t)
+
+
+
+(use-package clojure-mode
+  :ensure t
+  :config
+  (require 'flycheck-clj-kondo))
+
+
+
+
 (use-package cider
   :ensure t
   :bind   ("C-c M-o" . cider-repl-clear-buffer)
