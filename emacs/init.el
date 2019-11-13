@@ -400,6 +400,10 @@
 
 
 
+(setq-default js-indent-level 2
+              js-switch-indent-offset 2)
+
+
 ;;;; The End -------------------------------------------------------------------
 
 (message "init.el loaded in %fs" (- (float-time) *emacs-load-start*))
