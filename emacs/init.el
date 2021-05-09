@@ -280,7 +280,9 @@
 
 (use-package avy
   :ensure t
-  :bind   ("C-c j" . avy-goto-word-1))
+  :bind   ("C-c j" . avy-goto-word-1)
+  :config
+  (setq avy-all-windows 'all-frames))
 
 
 
